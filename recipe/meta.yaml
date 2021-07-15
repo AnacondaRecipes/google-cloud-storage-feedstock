@@ -1,4 +1,4 @@
-{% set version = "1.40.0" %}
+{% set version = "1.41.0" %}
 
 package:
   name: google-cloud-storage
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/g/google-cloud-storage/google-cloud-storage-{{ version }}.tar.gz
-  sha256: 560f7d112dce319a39b06c35cf53ae156ef42dfb213fc633c09aefaae7c060ec
+  sha256: 44019944c6675f1ee733b19bd0720677a52924100d5ffdb006da6a4efa411564
 
 build:
   noarch: python
@@ -21,8 +21,8 @@ requirements:
     - wheel
   run:
     - python >=3.6
-    - google-auth >=1.11.0,<2.0dev
-    - google-cloud-core >=1.4.1,<2.0dev
+    - google-auth >=1.24.0,<2.0dev
+    - google-cloud-core >=1.6.1,<2.0dev
     - google-resumable-media >=1.3.0,<2.0dev
     - requests >=2.18.0,<3.0.0dev
     # Workaround for https://github.com/conda-forge/aiohttp-feedstock/issues/43
