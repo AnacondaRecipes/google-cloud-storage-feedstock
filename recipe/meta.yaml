@@ -1,4 +1,4 @@
-{% set version = "1.41.0" %}
+{% set version = "1.43.0" %}
 
 package:
   name: google-cloud-storage
@@ -6,27 +6,29 @@ package:
 
 source:
   url: https://pypi.org/packages/source/g/google-cloud-storage/google-cloud-storage-{{ version }}.tar.gz
-  sha256: 44019944c6675f1ee733b19bd0720677a52924100d5ffdb006da6a4efa411564
+  sha256: f3b4f4be5c8a1b5727a8f7136c94d3bacdd4b7bf11f9553f51ae4c1d876529d3
 
 build:
-  noarch: python
   number: 0
+  # A lot of dependencies are not available on s390x and win32 currently
+  skip: True  # [py<36 or s390x or ppc64le or win32]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
     - setuptools
     - wheel
   run:
-    - python >=3.6
-    - google-auth >=1.24.0,<2.0dev
-    - google-cloud-core >=1.6.1,<2.0dev
-    - google-resumable-media >=1.3.0,<2.0dev
+    - python
+    - google-auth >=1.25.0,<3.0dev
+    - google-api-core >=1.29.0,<3.0dev
+    - google-cloud-core >=1.6.0,<3.0dev
+    - google-resumable-media >=1.3.0,<3.0dev
     - requests >=2.18.0,<3.0.0dev
-    # Workaround for https://github.com/conda-forge/aiohttp-feedstock/issues/43
-    - yarl <1.6.0,>=1.0
+    - protobuf
+    - six
 
 test:
   requires:
