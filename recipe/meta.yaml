@@ -10,7 +10,8 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<36]
+  # A lot of dependencies are not available on s390x and win32 currently
+  skip: True  # [py<36 or s390x or ppc64le or win32]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
