@@ -1,12 +1,13 @@
+{% set name = "google-cloud-storage"}
 {% set version = "1.43.0" %}
 
 package:
-  name: google-cloud-storage
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/g/google-cloud-storage/google-cloud-storage-{{ version }}.tar.gz
-  sha256: f3b4f4be5c8a1b5727a8f7136c94d3bacdd4b7bf11f9553f51ae4c1d876529d3
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 382f34b91de2212e3c2e7b40ec079d27ee2e3dbbae99b75b1bcd8c63063ce235
 
 build:
   number: 0
@@ -23,12 +24,11 @@ requirements:
   run:
     - python
     - google-auth >=1.25.0,<3.0dev
-    - google-api-core >=1.29.0,<3.0dev
-    - google-cloud-core >=1.6.0,<3.0dev
-    - google-resumable-media >=1.3.0,<3.0dev
+    - google-api-core >=1.31.5,<3.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0
+    - google-cloud-core >=2.3.0,<3.0dev
+    - google-resumable-media >=2.3.2,<3.0dev
     - requests >=2.18.0,<3.0.0dev
-    - protobuf
-    - six
+    - protobuf <5.0.0dev
 
 test:
   requires:
@@ -44,11 +44,12 @@ test:
 about:
   home: https://github.com/googleapis/python-storage
   summary: Python Client for Google Cloud Storage
-  doc_url: https://googleapis.dev/python/storage/latest/index.html
+  doc_url: https://cloud.google.com/python/docs/reference/storage/latest/index.html
   dev_url: https://github.com/googleapis/python-storage
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
+  license_url: https://github.com/googleapis/python-storage/blob/main/LICENSE
 
 extra:
   recipe-maintainers:
