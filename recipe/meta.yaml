@@ -1,8 +1,8 @@
-{% set name = "google-cloud-storage"}
+{% set name = "google-cloud-storage" %}
 {% set version = "2.6.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name | lower }}
   version: {{ version }}
 
 source:
