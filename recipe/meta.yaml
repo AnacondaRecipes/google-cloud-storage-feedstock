@@ -1,5 +1,5 @@
 {% set name = "google-cloud-storage" %}
-{% set version = "2.17.0" %}
+{% set version = "2.18.0" %}
 
 package:
   name: {{ name | lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 49378abff54ef656b52dca5ef0f2eba9aa83dc2b2c72c78714b03a1a95fe9388
+  sha256: 0aa3f7c57f3632f81b455d91558d2b27ada96eee2de3aaa17f689db1470d9578
 
 build:
   number: 0
@@ -29,7 +29,9 @@ requirements:
     - requests >=2.18.0,<3.0.0dev
     - google-crc32c >=1.0,<2.0dev
     # protobuf extra
-    - protobuf <5.0.0dev
+    - protobuf <6.0.0dev
+  run_constrained:
+    - opentelemetry-api >=1.1.0
 
 test:
   requires:
