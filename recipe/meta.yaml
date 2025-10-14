@@ -22,14 +22,14 @@ requirements:
     - wheel
   run:
     - python
-    - google-auth >=2.26.1,<3.0dev
-    - google-api-core >=2.15.0,<3.0.0dev
-    - google-cloud-core >=2.4.2,<3.0dev
-    - google-resumable-media >=2.7.2
-    - requests >=2.18.0,<3.0.0dev
-    - google-crc32c >=1.0,<2.0dev
-    - protobuf <6.0.0dev
+    - google-auth >=2.26.1,<3.0.0
+    - google-api-core >=2.15.0,<3.0.0
+    - google-cloud-core >=2.4.2,<3.0.0
+    - google-resumable-media >=2.7.2,<3.0.0
+    - requests >=2.18.0,<3.0.0
+    - google-crc32c >=1.0,<2.0.0
   run_constrained:
+    - protobuf >= 3.20.2,< 7.0.0
     - opentelemetry-api >=1.1.0
 
 test:
