@@ -1,13 +1,13 @@
 {% set name = "google-cloud-storage" %}
-{% set version = "3.8.0" %}
+{% set version = "3.9.0" %}
 
 package:
   name: {{ name | lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/google_cloud_storage-{{ version }}.tar.gz
-  sha256: cc67952dce84ebc9d44970e24647a58260630b7b64d72360cedaf422d6727f28
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
+  sha256: f2d8ca7db2f652be757e92573b2196e10fbc09649b5c016f8b422ad593c641cc
 
 build:
   number: 0
@@ -23,24 +23,61 @@ requirements:
   run:
     - python
     - google-auth >=2.26.1,<3.0.0
-    - google-api-core >=2.15.0,<3.0.0
+    - google-api-core >=2.27.0,<3.0.0
     - google-cloud-core >=2.4.2,<3.0.0
     - google-resumable-media >=2.7.2,<3.0.0
-    - requests >=2.18.0,<3.0.0
-    - google-crc32c >=1.0,<2.0.0
+    - requests >=2.22.0,<3.0.0
+    - google-crc32c >=1.1.3,<2.0.0
   run_constrained:
-    - protobuf >= 3.20.2,< 7.0.0
-    - opentelemetry-api >=1.1.0
+    - protobuf >=3.20.2,<7.0.0
+    - opentelemetry-api >=1.1.0,<2.0.0
+
+{% set ignored_tests = [
+  "--ignore=tests/conformance",
+  "--ignore=tests/perf",
+  "--ignore=tests/system",
+  "--ignore=tests/resumable_media",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_compose_w_if_generation_match_and_if_s_generation_match",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_compose_w_if_generation_match_list_w_warning",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_compose_w_if_metageneration_match_list_w_warning",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_download_as_string",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_download_as_string_no_retry",
+  "--deselect=tests/unit/test_blob.py::Test_Blob::test_from_string",
+  "--deselect=tests/unit/test_bucket.py::Test_Bucket::test_get_bucket_from_string",
+  "--deselect=tests/unit/test_bucket.py::Test_Bucket::test_lifecycle_rules_getter_unknown_action_type",
+  "--deselect=tests/unit/test_bucket.py::Test_Bucket::test_location_setter",
+  "--deselect=tests/unit/test_client.py::TestClient::test_create_bucket_w_custom_endpoint",
+  "--deselect=tests/unit/test_client.py::TestClient::test_create_bucket_w_requester_pays_deprecated",
+  "--deselect=tests/unit/test_client.py::TestClient::test_ctor_w_api_endpoint_override",
+  "--deselect=tests/unit/test_client.py::TestClient::test_ctor_w_custom_endpoint_use_auth",
+  "--deselect=tests/unit/test_client.py::TestClient::test_list_buckets_w_custom_endpoint",
+  "--deselect=tests/unit/test_client.py::TestClient::test_list_buckets_w_partial_success",
+  "--deselect=tests/unit/test_client.py::TestClient::test_update_user_agent_when_default_clientinfo_provided",
+  "--deselect=tests/unit/test_client.py::TestClient::test_update_user_agent_when_none_clientinfo_provided",
+  "--deselect=tests/unit/test_client.py::TestClient::test_update_user_agent_with_existing_user_agent",
+  "--deselect=tests/unit/test_fileio.py::TestBlobWriterBinary::test_write",
+  "--deselect=tests/unit/test_fileio.py::TestBlobWriterText::test_write"
+]%}
 
 test:
+  source_files:
+    - tests
   requires:
     - pip
+    - pytest
+    - pytest-asyncio
+    - pytest-mock
+    - google-api-core-grpc
+    - grpc-google-iam-v1
+    - psutil
+    - mock
   imports:
     - google
     - google.cloud
     - google.cloud.storage
   commands:
     - pip check
+    - pytest -v {{ ignored_tests | join(" ") }}
 
 about:
   home: https://github.com/googleapis/python-storage
