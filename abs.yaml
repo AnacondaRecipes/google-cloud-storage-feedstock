@@ -1,2 +1,4 @@
 build_env_vars:
-  ANACONDA_ROCKET_ENABLE_PY313 : yes
+  ANACONDA_ROCKET_ENABLE_PY314 : yes
+channels:
+  - https://staging.continuum.io/preprod-pbp/fs/google-cloud-core-feedstock/pr13/9be2e25
