@@ -30,6 +30,15 @@
 {% if osx %}
 {% set ignored_tests = ignored_tests + ["--deselect=tests/unit/test_transfer_manager.py::test_download_many_to_path_creates_directories"] %}
 {% endif %}
+{# Path.resolve() produces Windows-style paths that don't match test expectations built with os.path.join;
+   mock.patch("os.name", "nt") doesn't intercept os.name inside already-imported transfer_manager module #}
+{% if win %}
+{% set ignored_tests = ignored_tests + [
+  "--deselect=tests/unit/test_transfer_manager.py::test__resolve_path_raises_invalid_path_error_on_windows",
+  "--deselect=tests/unit/test_transfer_manager.py::test_download_many_to_path",
+  "--deselect=tests/unit/test_transfer_manager.py::test_download_many_to_path_creates_directories"
+] %}
+{% endif %}
 
 package:
   name: {{ name | lower }}
@@ -85,7 +94,7 @@ test:
     - pytest -v {{ ignored_tests | join(" ") }}
 
 about:
-  home: https://github.com/googleapis/python-storage
+  home: https://github.com/googleapis/google-cloud-python/tree/main/packages/google-cloud-storage
   summary: Python Client for Google Cloud Storage
   description: |
     Python client for a durable and highly available object storage service.
@@ -93,7 +102,7 @@ about:
     consistency; when a write succeeds, the latest copy of the object will
     be returned to any GET, globally.
   doc_url: https://cloud.google.com/python/docs/reference/storage/latest/index.html
-  dev_url: https://github.com/googleapis/python-storage
+  dev_url: https://github.com/googleapis/google-cloud-python/tree/main/packages/google-cloud-storage
   license: Apache-2.0
   license_family: APACHE
   license_file: LICENSE
