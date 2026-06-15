@@ -41,7 +41,7 @@
 {% endif %}
 
 package:
-  name: {{ name | lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
