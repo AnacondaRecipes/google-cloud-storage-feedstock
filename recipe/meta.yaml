@@ -60,12 +60,9 @@ requirements:
   "--deselect=tests/unit/test_fileio.py::TestBlobWriterBinary::test_write",
   "--deselect=tests/unit/test_fileio.py::TestBlobWriterText::test_write"
 ] %}
-{# Path.resolve() expands /var -> /private/var on macOS; test compares against os.path.join which doesn't resolve symlinks #}
 {% if osx %}
 {% set ignored_tests = ignored_tests + ["--deselect=tests/unit/test_transfer_manager.py::test_download_many_to_path_creates_directories"] %}
 {% endif %}
-{# Path.resolve() produces Windows-style paths that don't match test expectations built with os.path.join;
-   mock.patch("os.name", "nt") doesn't intercept os.name inside already-imported transfer_manager module #}
 {% if win %}
 {% set ignored_tests = ignored_tests + [
   "--deselect=tests/unit/test_transfer_manager.py::test__resolve_path_raises_invalid_path_error_on_windows",
