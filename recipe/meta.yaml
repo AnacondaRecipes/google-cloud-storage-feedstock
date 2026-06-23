@@ -29,9 +29,14 @@ requirements:
     - requests >=2.22.0,<3.0.0
     - google-crc32c >=1.6.0,<2.0.0
   run_constrained:
-    - protobuf >=3.20.2,<7.0.0
+    - protobuf >=4.25.8,<8.0.0
     - opentelemetry-api >=1.1.0,<2.0.0
-    - grpcio-status >=1.76.0,<2.0.0
+    - grpcio >=1.59.0,<2.0.0  # [py<314]
+    - grpcio >=1.75.1,<2.0.0  # [py>=314]
+    - grpcio-status >=1.59.0,<2.0.0  # [py<314]
+    - grpcio-status >=1.75.1,<2.0.0  # [py>=314]
+    - proto-plus >=1.22.3,<2.0.0  # [py<313]
+    - proto-plus >=1.25.0,<2.0.0  # [py>=313]
     - grpc-google-iam-v1 >=0.14.0,<1.0.0
 
 {% set ignored_tests = [
