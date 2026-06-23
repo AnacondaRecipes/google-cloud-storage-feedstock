@@ -1,5 +1,5 @@
 {% set name = "google-cloud-storage" %}
-{% set version = "3.11.0" %}
+{% set version = "3.12.0" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
-  sha256: 498bf37c999028f69a245f586b5e50d89f59df1fafc0e3a93783ac56be2a456b
+  sha256: 03ae9847c6babb368f35f054126b8a08cbc0e3266efb990eb17b9926a45cf3be
 
 build:
   number: 0
@@ -29,9 +29,14 @@ requirements:
     - requests >=2.22.0,<3.0.0
     - google-crc32c >=1.6.0,<2.0.0
   run_constrained:
-    - protobuf >=3.20.2,<7.0.0
+    - protobuf >=4.25.8,<8.0.0
     - opentelemetry-api >=1.1.0,<2.0.0
-    - grpcio-status >=1.76.0,<2.0.0
+    - grpcio >=1.59.0,<2.0.0  # [py<314]
+    - grpcio >=1.75.1,<2.0.0  # [py>=314]
+    - grpcio-status >=1.59.0,<2.0.0  # [py<314]
+    - grpcio-status >=1.75.1,<2.0.0  # [py>=314]
+    - proto-plus >=1.22.3,<2.0.0  # [py<313]
+    - proto-plus >=1.25.0,<2.0.0  # [py>=313]
     - grpc-google-iam-v1 >=0.14.0,<1.0.0
 
 {% set ignored_tests = [
@@ -70,6 +75,7 @@ requirements:
   "--deselect=tests/unit/test_transfer_manager.py::test_download_many_to_path_creates_directories"
 ] %}
 {% endif %}
+
 test:
   source_files:
     - tests
