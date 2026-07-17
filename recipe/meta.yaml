@@ -2,7 +2,7 @@
 {% set version = "2.18.0" %}
 
 package:
-  name: {{ name | lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -10,7 +10,7 @@ source:
   sha256: 0aa3f7c57f3632f81b455d91558d2b27ada96eee2de3aaa17f689db1470d9578
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -51,7 +51,7 @@ about:
     Google Cloud Storage is almost infinitely scalable and guarantees
     consistency; when a write succeeds, the latest copy of the object will
     be returned to any GET, globally.
-  doc_url: https://cloud.google.com/python/docs/reference/storage/latest/index.html
+  doc_url: https://docs.cloud.google.com/python/docs/reference/storage/latest
   dev_url: https://github.com/googleapis/python-storage
   license: Apache-2.0
   license_family: APACHE
