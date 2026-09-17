@@ -1,5 +1,5 @@
 {% set name = "google-cloud-storage" %}
-{% set version = "3.12.0" %}
+{% set version = "3.14.1" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') }}-{{ version }}.tar.gz
-  sha256: 03ae9847c6babb368f35f054126b8a08cbc0e3266efb990eb17b9926a45cf3be
+  sha256: b24e74b493c60b19b83462933a83bb831e45b6ca4924b0d75eac8e176b58b3a7
 
 build:
   number: 0
@@ -29,15 +29,15 @@ requirements:
     - requests >=2.22.0,<3.0.0
     - google-crc32c >=1.6.0,<2.0.0
   run_constrained:
-    - protobuf >=4.25.8,<8.0.0
+    - protobuf >=6.33.5,<8.0.0
     - opentelemetry-api >=1.1.0,<2.0.0
     - grpcio >=1.59.0,<2.0.0  # [py<314]
     - grpcio >=1.75.1,<2.0.0  # [py>=314]
     - grpcio-status >=1.59.0,<2.0.0  # [py<314]
     - grpcio-status >=1.75.1,<2.0.0  # [py>=314]
     - proto-plus >=1.22.3,<2.0.0  # [py<313]
-    - proto-plus >=1.25.0,<2.0.0  # [py>=313]
-    - grpc-google-iam-v1 >=0.14.0,<1.0.0
+    - proto-plus >=1.26.1,<2.0.0  # [py>=313]
+    - grpc-google-iam-v1 >=0.14.2,<1.0.0
 
 {% set ignored_tests = [
   "--ignore=tests/conformance",
