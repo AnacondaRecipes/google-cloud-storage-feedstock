@@ -37,7 +37,7 @@ requirements:
     - grpcio-status >=1.75.1,<2.0.0  # [py>=314]
     - proto-plus >=1.22.3,<2.0.0  # [py<313]
     - proto-plus >=1.26.1,<2.0.0  # [py>=313]
-    - grpc-google-iam-v1 >=0.14.0,<1.0.0
+    - grpc-google-iam-v1 >=0.14.2,<1.0.0
 
 {% set ignored_tests = [
   "--ignore=tests/conformance",
